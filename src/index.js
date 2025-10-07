@@ -11,20 +11,26 @@ const changeNavigationBarColor = (
     const LightNav = light ? true : false;
     return NavigationBarColor.changeNavigationBarColor(color, LightNav, animated);
   }
+  return Promise.resolve();
 };
 const hideNavigationBar = () => {
   if (Platform.OS === 'android') {
     return NavigationBarColor.hideNavigationBar();
-  } else {
-    return false;
   }
+  return Promise.resolve(false);
 };
 const showNavigationBar = () => {
   if (Platform.OS === 'android') {
-    NavigationBarColor.showNavigationBar();
-  } else {
-    return false;
+    return NavigationBarColor.showNavigationBar();
   }
+  return Promise.resolve(false);
+};
+const isNavigationBarVisible = () => {
+    if (Platform.OS === 'android') {
+     return NavigationBarColor.isNavigationBarVisible();
+    } else {
+     return Promise.resolve({ isVisible: false, navigationBarHeight: 0 });
+    }
 };
 
-export {changeNavigationBarColor, hideNavigationBar, showNavigationBar};
+export {changeNavigationBarColor, hideNavigationBar, showNavigationBar, isNavigationBarVisible};
